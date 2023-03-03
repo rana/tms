@@ -2,7 +2,7 @@
 
 <!-- Markdown https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax -->
 
-![brand logo](./imgs/brand-logo.svg)
+![Brand logo](./imgs/brand-logo.svg)
 
 # TMS – Time series compression library
 
@@ -68,7 +68,8 @@ Project tasks:
 
 The `tms` crate is composed of the `mcr` and `tms` modules. 
 
-![crates](./imgs/crates.svg)
+![Crates](./imgs/crates.svg)
+
 > Figure 1. Modules in the `tms` crate.
 
 The `mcr` module, an acronym for "macro", provides procedural macros which generate compression functions. `mcr` generates `tms`.
@@ -88,6 +89,7 @@ Different types of compression are explained and then combined into a final expl
 Compression can be explained with the analogy of a box with a gift in it. The box is a data type, and the gift is the actual data that's used.
 
 ![Gift in a box](./imgs/one-gift.svg)
+
 > Figure 2. An analogy of a data type as a box, and the gift in the box as the data that's used.
 
 The gift in the box is what we want, but computer chips are physically etched to work with convenient-sized boxes. The box is convenient. It works. And we carry it around.
@@ -95,6 +97,7 @@ The gift in the box is what we want, but computer chips are physically etched to
 The gift in the box is so useful, we decide to do more things with more gifts.
 
 ![Three gifts, three boxes](./imgs/three-gifts-three-boxes.svg)
+
 > Figure 3. Three boxes, each with gifts.
 
 We start to notice that carrying and using more boxes isn't quite as convenient as when we had just one box. We look into each box and see that the gifts don't take up all the space of the boxes. 
@@ -110,6 +113,7 @@ In the case where we're given boxes from someone else, we may not have the optio
 So another option can be to use one box for three gifts. That would make it easier to carry the gifts around. That's compression.
 
 ![Three gifts, one box](./imgs/three-gifts-one-box.svg)
+
 > Figure 4. An analogy of compression as one box with three gifts.
 
 To have three gifts in one box, each gift has to be moved from their original boxes. It takes time to move the gifts for the convenience of carrying one box. 
@@ -117,6 +121,7 @@ To have three gifts in one box, each gift has to be moved from their original bo
 Inside the computer processor, to use each gift, we have to move the gifts back into individual boxes before using them. It's effort to program. And it's effort for the processor to move gifts.
 
 ![Compression process](./imgs/compression-process.svg)
+
 > Figure 5. An analogy of compression as moving gifts between individual boxes and one box.
 
 So, is it worth compressing data with having to move gifts around? It depends on the context and data. For time series, the answer is yes. The changes between points of a time series are often small enough to enable compression in a reasonble amount of time.
@@ -127,7 +132,7 @@ Differential encoding subtracts one point from another. Instead of remembering `
 
 ![Differential encoding](./imgs/differential-encoding.svg)
 
-> Figure X. Differential encoding subtracts one point from another.
+> Figure 6. Differential encoding subtracts one point from another.
 
 ## Binary packing compression
 
@@ -135,7 +140,7 @@ Binary packing is moving gifts next to one another in a single box. The gifts ca
 
 ![Binary packing](./imgs/binary-packing.svg)
 
-> Figure X. An analogy of binary packing compression as placing gifts next to each other in a box.
+> Figure 7. An analogy of binary packing compression as placing gifts next to each other in a box.
 
 Binary packing uses bit-shift operations to move the gifts in and out of boxes. Bit-shifting is fast for a computer.
 
@@ -145,7 +150,7 @@ Binary packing uses bit-shift operations to move the gifts in and out of boxes. 
 
 ![Converting NaiveDateTimes to u32s](./imgs/varint.svg)
 
-> Figure X. An analogy of variable integer compression as moving a gift to a smaller box with a pre-defined size.
+> Figure 8. An analogy of variable integer compression as moving a gift to a smaller box with a pre-defined size.
 
 `varint` is relatively short to program. Ten lines of code are used in the `tms` compress function `usize_pck`.
 
@@ -174,7 +179,7 @@ The internal representation of each time becomes smaller. The list of 12-byte Na
 
 ![Converting NaiveDateTimes to u32s](./imgs/datetimes-to-u32s.svg)
 
-> Figure X. A list of 12-byte NaiveDateTimes compressed to a list of u32s using differential encoding.
+> Figure 9. A list of 12-byte NaiveDateTimes compressed to a list of u32s using differential encoding.
 
 ### Segmenting a list of u32s into blocks
 
@@ -182,7 +187,7 @@ The list of u32s is then segmented into blocks to support SIMD instructions. Eac
 
 ![Segementing blocks](./imgs/block-segmenting.svg)
 
-> Figure X. A list of u32s, represented as milliseconds, are segmented into blocks of 256 elements. The last block may have a variable number of elements.
+> Figure 10. A list of u32s, represented as milliseconds, are segmented into blocks of 256 elements. The last block may have a variable number of elements.
 
 ### Differential encoding a block with SIMD
 
@@ -192,7 +197,7 @@ A SIMD instruction subtracts one list from another. Each list has eight unsigned
 
 ![Differential encoding with SIMD](./imgs/simd-subtraction.svg)
 
-> Figure X. Subtracting two lists of unsigned integers with a SIMD instruction. Unsigned integers are represented as milliseconds. Elements are subtracted at corresponding indexes.
+> Figure 11. Subtracting two lists of unsigned integers with a SIMD instruction. Unsigned integers are represented as milliseconds. Elements are subtracted at corresponding indexes.
 
 While the milliseconds are sequential, they can be randomly distributed. Notice that the differences are not sequential.
 
@@ -202,7 +207,7 @@ The differential encodings within a block is scanned for a maximum. The maximum 
 
 ![Binary packing with SIMD](./imgs/simd-binary-packing.svg)
 
-> Figure X. Moving bits into smaller boxes with SIMD bit-shifting. 
+> Figure 12. Moving bits into smaller boxes with SIMD bit-shifting. 
 
 A single box size per block supports SIMDs ability to do one thing on many pieces of data. The box size varies from block-to-block for to improve compression size whlie allowing decompression speed.
 
