@@ -47,9 +47,9 @@ Compressed time series enables traversing large datasets quickly.
 
 ## Project state
 
-`tms` is a work in progress. Some tests work. Some bugs need to be resolved. Some features are to be built. 
+`tms` is a work in progress. Some tests work. Some bugs are to be resolved. Some features are to be built. 
 
-The intent to offer existing work, and not wait until all details are resolved. I appreciate when others do the same. I learn from people who are sharing their progress, and hope you will too.
+The intent to offer existing work before a final version, and not wait until all details are resolved. I appreciate when others do the same. I learn from people who are sharing their progress, and hope you will too.
 
 256-bit SIMD vectors on x86 chips are currently supported.
 
@@ -82,7 +82,7 @@ Values are compressed by day with the `append_day` method. Values are accessible
 
 ## Explaining the design
 
-Different types of compression are explained and then combined into a final explanation for the `tms` compression algorithm.
+Different types of compression are explained, and then combined in a final explanation of the `tms` compression algorithm.
 
 ## About compression
 
@@ -92,7 +92,7 @@ Compression can be explained with the analogy of a box with a gift in it. The bo
 
 > Figure 2. An analogy of a data type as a box, and the gift in the box as the data that's used.
 
-The gift in the box is what we want, but computer chips are physically etched to work with convenient-sized boxes. The box is convenient. It works. And we carry it around.
+The gift in the box is what we want. Computer chips are physically etched to work with convenient-sized boxes. The box is convenient. It works. And we carry it around.
 
 The gift in the box is so useful, we decide to do more things with more gifts.
 
@@ -106,7 +106,7 @@ Why don't we just use the gifts?
 1. The used data, the gift, might sometimes expand into the whole box.
 2. The processor is physically designed to use boxes of a certain size.
 
-We could use smaller boxes, if we have the option. The computer can use different sized boxes. If we understand the context of the data well enough, and know that we never need a large box, we can choose a smaller box. With smaller boxes, it's also possible that space is still left over in each box. Often the size of each box has to be as large as the largest gift.
+We could use smaller boxes, if we have the option. Computers can use different sized boxes. If we understand the context of the data well enough, and know that we never need a large box, the simplest solution is to choose a smaller box. With smaller boxes, it's also possible that space is still left over in each box. Often the size of each box has to be as large as the largest gift.
 
 In the case where we're given boxes from someone else, we may not have the option to choose a smaller box. For example, using a timestamp or 64-bit floating point value.
 
@@ -203,7 +203,7 @@ While the milliseconds are sequential, they can be randomly distributed. Notice 
 
 ### Binary packing a block with SIMD
 
-The differential encodings within a block is scanned for a maximum. The maximum is set as the box size for all values in the block. A list of unsigned integers is are bit-shifted with SIMD instructions.
+The differential encodings within a block is scanned for a maximum. The maximum is set as the box size for all values in the block. A list of unsigned integers are bit-shifted with SIMD instructions.
 
 ![Binary packing with SIMD](./imgs/simd-binary-packing.svg)
 
