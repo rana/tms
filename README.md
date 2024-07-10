@@ -136,7 +136,7 @@ Differential encoding subtracts one point from another. Instead of remembering `
 
 ## Binary packing compression
 
-Binary packing is moving gifts next to one another in a single box. The gifts can be any size, and aren't necessarily the pre-defined sizes the computer likes to work with. The destination size can be the size of the largest gift.
+Binary packing is moving gifts next to one another into a single box. The gifts can be any size, and aren't necessarily the pre-defined sizes the computer likes to work with. The destination size can be the size of the largest gift.
 
 ![Binary packing](./imgs/binary-packing.svg)
 
