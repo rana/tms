@@ -6,8 +6,6 @@
 
 # TMS – Time series compression library
 
-Fast access to large amounts of financial time series data in a single modern language.
-
 - [TMS – Time series compression library](#tms--time-series-compression-library)
   - [Summary](#summary)
   - [Project state](#project-state)
@@ -30,20 +28,20 @@ Fast access to large amounts of financial time series data in a single modern la
 
 ## Summary
 
-`tms` is a time series compression library written in Rust.
-* Designed for financial data.
-* Optimized for fast decompression with SIMD instructions.
-* Good space compression.
-* Can be used with in-memory caches.
-* Can be used with on-disk storage.
+ High-performance time series compression library in Rust
+  - Designed for financial data with millisecond precision
+  - Optimized for fast decompression using SIMD instructions
+  - Implements advanced compression techniques including differential encoding, binary packing, and variable integer compression
+  - Supports both in-memory caches and on-disk storage
+  - Based on vectorization research by Daniel Lemire et al.
+  - Currently supports 256-bit SIMD vectors on x86 chips
+  - Includes features for compressing and decompressing date-time series data
 
-`tms` is an acronym for "Time Series".
+`tms` = Time Series
 
 `tms` is based on the work described in: 
 * "[Decoding billions of integers per second through vectorization](https://arxiv.org/abs/1209.2137)" by Daniel Lemire and Leonid Boytsov.
 * "[SIMD Compression and the Intersection of Sorted Integers](https://arxiv.org/abs/1401.6399)" by Daniel Lemire, Leonid Boytsov, and Nathan Kurz.
-
-Compressed time series enables traversing large datasets quickly.
 
 ## Project state
 
