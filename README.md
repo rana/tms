@@ -8,6 +8,10 @@
 
 - [TMS – Time series compression library](#tms--time-series-compression-library)
   - [Summary](#summary)
+  - [Key Features:](#key-features)
+  - [Technical Highlights:](#technical-highlights)
+  - [Skills Demonstrated:](#skills-demonstrated)
+  - [Current Project State:](#current-project-state)
   - [Project state](#project-state)
   - [Rust modules, struct, and methods](#rust-modules-struct-and-methods)
   - [Explaining the design](#explaining-the-design)
@@ -28,6 +32,8 @@
 
 ## Summary
 
+TMS is a specialized time series compression library written in Rust, designed specifically for financial market data with a focus on optimal performance through SIMD (Single Instruction Multiple Data) operations.
+
  High-performance time series compression library in Rust
   - Designed for financial data with millisecond precision
   - Optimized for fast decompression using SIMD instructions
@@ -42,6 +48,75 @@
 `tms` is based on the work described in: 
 * "[Decoding billions of integers per second through vectorization](https://arxiv.org/abs/1209.2137)" by Daniel Lemire and Leonid Boytsov.
 * "[SIMD Compression and the Intersection of Sorted Integers](https://arxiv.org/abs/1401.6399)" by Daniel Lemire, Leonid Boytsov, and Nathan Kurz.
+
+## Key Features:
+1. High-Performance Compression
+- Uses SIMD instructions (256-bit vectors) for fast compression/decompression
+- Implements differential encoding with binary packing for efficient storage
+- Employs variable integer (varint) compression for additional space savings
+
+2. Financial Market Optimization
+- Specifically designed for NYSE trading hours (9:30 AM - 4:00 PM ET)
+- Optimizes storage by focusing on market hours, improving compression ratios
+- Supports millisecond-precision timestamps
+
+3. Technical Implementation
+- Uses a hybrid compression approach:
+  * Differential encoding to reduce value sizes
+  * Binary packing with SIMD for parallel processing
+  * Variable integer compression for remaining values
+- Block-based processing with 256-element blocks for SIMD efficiency
+- Clean API with main struct `TmeMli` for handling datetime sequences
+
+4. Architecture
+- Two main modules:
+  * `mcr`: Provides procedural macros for generating compression functions
+  * `tms`: Implements the core compression algorithms and data structures
+- Uses advanced Rust features like SIMD, unsafe blocks, and procedural macros
+
+## Technical Highlights:
+1. Compression Algorithm
+- Converts 12-byte NaiveDateTimes to compressed u32 representations
+- Segments data into 256-element blocks for SIMD processing
+- Uses differential encoding within blocks
+- Applies binary packing with dynamic bit widths
+- Falls back to varint compression for partial blocks
+
+2. Performance Optimizations
+- SIMD-accelerated operations for parallel processing
+- Efficient memory layout for fast access
+- Optimized bit-packing for minimal storage overhead
+- Fast decompression prioritized in design
+
+## Skills Demonstrated:
+1. Rust Expertise
+- Advanced language features (SIMD, unsafe, procedural macros)
+- Systems programming and memory management
+- Performance optimization techniques
+
+2. Algorithm Design
+- Compression algorithm implementation
+- SIMD vectorization
+- Binary data manipulation
+
+3. Financial Domain Knowledge
+- Understanding of market data requirements
+- Trading hours optimization
+- Time series handling
+
+4. Software Engineering
+- Clean API design
+- Comprehensive testing
+- Performance benchmarking
+- Documentation
+
+## Current Project State:
+- Core functionality implemented and tested
+- Some features pending implementation (floating-point compression)
+- Active development with clear roadmap
+- Comprehensive test coverage for existing features
+
+This project showcases advanced Rust programming skills, understanding of low-level optimization techniques, and domain knowledge in financial data processing. It demonstrates the ability to work with complex algorithms while maintaining clean, maintainable code.
 
 ## Project state
 
