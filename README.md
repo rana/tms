@@ -49,7 +49,7 @@ TMS is a specialized time series compression library written in Rust, designed s
 * "[Decoding billions of integers per second through vectorization](https://arxiv.org/abs/1209.2137)" by Daniel Lemire and Leonid Boytsov.
 * "[SIMD Compression and the Intersection of Sorted Integers](https://arxiv.org/abs/1401.6399)" by Daniel Lemire, Leonid Boytsov, and Nathan Kurz.
 
-## Key Features:
+## Key Features
 1. High-Performance Compression
 - Uses SIMD instructions (256-bit vectors) for fast compression/decompression
 - Implements differential encoding with binary packing for efficient storage
@@ -74,7 +74,7 @@ TMS is a specialized time series compression library written in Rust, designed s
   * `tms`: Implements the core compression algorithms and data structures
 - Uses advanced Rust features like SIMD, unsafe blocks, and procedural macros
 
-## Technical Highlights:
+## Technical Highlights
 1. Compression Algorithm
 - Converts 12-byte NaiveDateTimes to compressed u32 representations
 - Segments data into 256-element blocks for SIMD processing
@@ -88,7 +88,7 @@ TMS is a specialized time series compression library written in Rust, designed s
 - Optimized bit-packing for minimal storage overhead
 - Fast decompression prioritized in design
 
-## Skills Demonstrated:
+## Skills Demonstrated
 1. Rust Expertise
 - Advanced language features (SIMD, unsafe, procedural macros)
 - Systems programming and memory management
@@ -110,7 +110,7 @@ TMS is a specialized time series compression library written in Rust, designed s
 - Performance benchmarking
 - Documentation
 
-## Current Project State:
+## Current Project State
 - Core functionality implemented and tested
 - Some features pending implementation (floating-point compression)
 - Active development with clear roadmap
