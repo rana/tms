@@ -282,7 +282,7 @@ The differential encodings within a block is scanned for a maximum. The maximum 
 
 > Figure 12. Moving bits into smaller boxes with SIMD bit-shifting. 
 
-A single box size per block supports SIMDs ability to do one thing on many pieces of data. The box size varies from block-to-block for to improve compression size whlie allowing decompression speed.
+A single box size per block supports SIMDs ability to do one thing on many pieces of data. The box size varies from block-to-block for to improve compression size while allowing decompression speed.
 
 ### Variable integer compression
 
